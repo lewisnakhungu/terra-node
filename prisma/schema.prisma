@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id                    String   @id
+  name                  String
+  region                String
+  country               String   @default("Kenya")
+  lat                   Float
+  lng                   Float
+  description           String
+  category              String
+  targetArea            Float
+  restoredArea          Float
+  fundingGoal           Float
+  fundingRaised         Float
+  costPerSqMeter        Float
+  status                String
+  imageUrl              String
+  startDate             String
+  estimatedCompletion   String
+  backers               Int      @default(0)
+  verificationScore     Int?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  transactions          Transaction[]
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+  type          String
+  timestamp     DateTime @default(now())
+  amount        Float
+  creditsOrArea Float
+  projectId     String
+  buyerName     String
+  status        String   @default("confirmed")
+  project       Project  @relation(fields: [projectId], references: [id])
+}
+
+model Company {
+  id        String @id @default(cuid())
+  name      String
+  industry  String
+  logoUrl   String?
+}

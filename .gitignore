@@ -74,6 +74,12 @@ web_modules/
 .cache
 .parcel-cache
 
+# SQLite database (generated locally)
+*.db
+*.db-journal
+prisma/*.db
+prisma/*.db-journal
+
 # Next.js build output
 .next
 out
