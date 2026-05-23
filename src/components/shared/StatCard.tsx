@@ -10,14 +10,12 @@ interface StatCardProps {
 
 export function StatCard({ label, value, icon: Icon, sub }: StatCardProps) {
   return (
-    <Card className="glass">
-      <CardContent className="flex items-start gap-4 p-5">
-        <div className="rounded-lg bg-primary/10 p-2.5">
-          <Icon className="h-5 w-5 text-primary" />
-        </div>
+    <Card>
+      <CardContent className="flex items-start gap-3 p-4">
+        <Icon className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm text-muted-foreground">{label}</p>
-          <p className="text-2xl font-semibold font-[family-name:var(--font-space)]">{value}</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wide">{label}</p>
+          <p className="text-xl font-semibold font-[family-name:var(--font-space)] mt-0.5">{value}</p>
           {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
         </div>
       </CardContent>

@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useTerraNode } from "@/context/TerraNodeContext";
 import { formatArea, formatCurrency } from "@/lib/formatters";
-import { ArrowLeft, MapPin, Users } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function ProjectDetailPage({
   params,
@@ -36,7 +36,7 @@ export default function ProjectDetailPage({
   if (!loading && !project) notFound();
   if (!project) {
     return (
-      <PageWrapper className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+      <PageWrapper className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
         <p className="text-muted-foreground">Loading project…</p>
       </PageWrapper>
     );
@@ -59,17 +59,17 @@ export default function ProjectDetailPage({
   };
 
   return (
-    <PageWrapper className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <PageWrapper className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
       <Button variant="ghost" size="sm" className="mb-6" asChild>
         <Link href="/projects">
           <ArrowLeft className="h-4 w-4" />
-          All Projects
+          All projects
         </Link>
       </Button>
 
       <div className="grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden mb-6">
+          <div className="relative h-64 sm:h-80 rounded-lg overflow-hidden mb-6">
             <Image
               src={project.imageUrl}
               alt={project.name}
@@ -79,22 +79,21 @@ export default function ProjectDetailPage({
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-3">
             <Badge className="capitalize">{project.category}</Badge>
             <Badge variant="secondary">{project.status}</Badge>
             {project.verificationScore != null && (
-              <Badge variant="accent">D-MRV {project.verificationScore}%</Badge>
+              <Badge variant="outline">D-MRV {project.verificationScore}%</Badge>
             )}
           </div>
-          <h1 className="text-3xl font-bold font-[family-name:var(--font-space)]">{project.name}</h1>
-          <p className="flex items-center gap-1 mt-2 text-muted-foreground">
-            <MapPin className="h-4 w-4" />
+          <h1 className="text-2xl font-bold">{project.name}</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
             {project.location.region}, {project.location.country}
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">{project.description}</p>
           <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
             <div>
-              <p className="text-muted-foreground">Target Area</p>
+              <p className="text-muted-foreground">Target area</p>
               <p className="font-semibold">{formatArea(project.targetArea)}</p>
             </div>
             <div>
@@ -103,10 +102,7 @@ export default function ProjectDetailPage({
             </div>
             <div>
               <p className="text-muted-foreground">Backers</p>
-              <p className="font-semibold flex items-center gap-1">
-                <Users className="h-4 w-4" />
-                {project.backers}
-              </p>
+              <p className="font-semibold">{project.backers}</p>
             </div>
             <div>
               <p className="text-muted-foreground">Cost / m²</p>
@@ -116,9 +112,9 @@ export default function ProjectDetailPage({
         </div>
 
         <div className="space-y-6">
-          <Card className="glass">
+          <Card>
             <CardContent className="p-6 space-y-4">
-              <h2 className="text-xl font-semibold">Funding Progress</h2>
+              <h2 className="text-lg font-semibold">Funding progress</h2>
               <FundingProgress raised={project.fundingRaised} goal={project.fundingGoal} />
             </CardContent>
           </Card>
@@ -132,7 +128,7 @@ export default function ProjectDetailPage({
             <>
               <AmountPicker amount={amount} onChange={setAmount} />
               <div className="space-y-2">
-                <Label>Your Name</Label>
+                <Label>Your name</Label>
                 <Input
                   value={buyerName}
                   onChange={(e) => setBuyerName(e.target.value)}

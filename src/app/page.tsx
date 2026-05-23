@@ -1,11 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight, Calculator, Leaf, Shield, Zap } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { StatCard } from "@/components/shared/StatCard";
-import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { useTerraNode } from "@/context/TerraNodeContext";
 import { formatArea, formatCurrency, formatNumber } from "@/lib/formatters";
@@ -14,124 +11,154 @@ export default function LandingPage() {
   const { projects, stats } = useTerraNode();
   const featured = projects.slice(0, 3);
 
-  const tickerItems = [
-    `${formatArea(stats.totalRestoredSqM)} restored`,
-    `${formatNumber(stats.totalBackers)} backers`,
-    `${formatNumber(stats.totalCredits)} credits issued`,
-    `${formatCurrency(stats.totalFunded)} funded`,
-    `${stats.activeProjects} active projects`,
-  ];
-
   return (
     <div>
-      <section className="gradient-hero relative overflow-hidden px-4 py-24 sm:py-32">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl font-bold tracking-tight sm:text-6xl font-[family-name:var(--font-space)]"
-          >
-            Every GPU Has a Footprint.
-            <span className="block text-primary mt-2">Restore It.</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto"
-          >
-            TerraNode bridges AI infrastructure growth and land restoration — calculate your arable land debt,
-            purchase verified credits, or crowdfund local projects across Kenya.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-10 flex flex-wrap justify-center gap-4"
-          >
+      {/* Hero */}
+      <section className="px-4 py-20 sm:py-28 border-b border-border">
+        <div className="mx-auto max-w-3xl">
+          <p className="text-sm font-mono text-muted-foreground mb-4">
+            AI compute &rarr; land restoration
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1]">
+            Every GPU has a footprint.
+            <br />
+            <span className="text-primary">Fund the fix.</span>
+          </h1>
+          <p className="mt-5 text-lg text-muted-foreground max-w-xl">
+            Calculate your data center&apos;s arable land debt, then offset it
+            by funding verified restoration projects across Kenya.
+          </p>
+          <div className="mt-8 flex gap-3">
             <Button size="lg" asChild>
-              <Link href="/calculator">
-                <Calculator className="h-5 w-5" />
-                Calculate Your Debt
-              </Link>
+              <Link href="/calculator">Calculate your debt</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/projects">
-                Fund Restoration
-                <ArrowRight className="h-5 w-5" />
+                Browse projects
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <div className="overflow-hidden border-y border-border bg-card/30 py-3">
-        <div className="ticker flex whitespace-nowrap gap-12">
-          {[...tickerItems, ...tickerItems].map((item, i) => (
-            <span key={i} className="text-sm font-mono text-muted-foreground flex items-center gap-2">
-              <Leaf className="h-3 w-3 text-primary" />
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            label="Land Restored"
-            value={<AnimatedCounter value={stats.totalRestoredSqM} format={formatArea} />}
-            icon={Leaf}
-          />
-          <StatCard
-            label="Total Backers"
-            value={<AnimatedCounter value={stats.totalBackers} />}
-            icon={Shield}
-          />
-          <StatCard
-            label="Credits Issued"
-            value={<AnimatedCounter value={stats.totalCredits} />}
-            icon={Zap}
-          />
-          <StatCard
-            label="Total Funded"
-            value={<AnimatedCounter value={stats.totalFunded} format={formatCurrency} />}
-            icon={Calculator}
-          />
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <h2 className="text-3xl font-bold text-center mb-12 font-[family-name:var(--font-space)]">
-          How It Works
-        </h2>
-        <div className="grid gap-8 md:grid-cols-3">
+      {/* Stats */}
+      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
           {[
-            { step: "01", title: "Calculate", desc: "Quantify your AI cluster's arable land and water debt.", icon: Calculator },
-            { step: "02", title: "Fund", desc: "Purchase corporate credits or micro-fund community projects.", icon: Leaf },
-            { step: "03", title: "Verify", desc: "Track D-MRV scores and restoration outcomes on-chain ready data.", icon: Shield },
-          ].map(({ step, title, desc, icon: Icon }) => (
-            <div key={step} className="glass rounded-xl p-6 text-center">
-              <span className="text-xs font-mono text-primary">{step}</span>
-              <Icon className="h-10 w-10 text-primary mx-auto my-4" />
-              <h3 className="font-semibold text-lg mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground">{desc}</p>
+            { label: "Land restored", value: formatArea(stats.totalRestoredSqM) },
+            { label: "Backers", value: formatNumber(stats.totalBackers) },
+            { label: "Credits issued", value: formatNumber(stats.totalCredits) },
+            { label: "Total funded", value: formatCurrency(stats.totalFunded) },
+          ].map(({ label, value }) => (
+            <div key={label}>
+              <p className="text-2xl font-semibold font-[family-name:var(--font-space)]">
+                {value}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold font-[family-name:var(--font-space)]">Featured Projects</h2>
-          <Button variant="ghost" asChild>
-            <Link href="/projects">View all <ArrowRight className="h-4 w-4" /></Link>
-          </Button>
+      {/* Featured projects */}
+      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 border-t border-border">
+        <div className="flex items-baseline justify-between mb-8">
+          <h2 className="text-2xl font-bold">Featured projects</h2>
+          <Link
+            href="/projects"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            View all &rarr;
+          </Link>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {featured.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="mx-auto max-w-5xl px-4 py-16 sm:px-6 border-t border-border scroll-mt-16">
+        <h2 className="text-2xl font-bold mb-6">About TerraNode</h2>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <p>
+              AI data centers consume massive amounts of land, water, and energy.
+              TerraNode quantifies this &ldquo;arable land debt&rdquo; and connects
+              companies to verified restoration projects that offset it.
+            </p>
+            <p>
+              We work with local communities across Kenya to fund reforestation,
+              wetland rehabilitation, and agroforestry initiatives &mdash; tracked
+              with D-MRV (digital Measurement, Reporting, and Verification) scoring.
+            </p>
+          </div>
+          <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <p>
+              Whether you&apos;re an enterprise buying corporate credits or an
+              individual micro-funding a project, every contribution translates
+              directly to square meters of restored land.
+            </p>
+            <p>
+              TerraNode is a hackathon prototype exploring the intersection of
+              AI infrastructure growth and ecological restoration. All payments
+              shown are simulated.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="mx-auto max-w-5xl px-4 py-16 sm:px-6 border-t border-border scroll-mt-16">
+        <h2 className="text-2xl font-bold mb-6">Get in touch</h2>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="space-y-4 text-muted-foreground">
+            <p className="leading-relaxed">
+              Interested in partnering, investing, or learning more about
+              TerraNode? We&apos;d love to hear from you.
+            </p>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 shrink-0" />
+                <a href="mailto:hello@terranode.earth" className="hover:text-foreground transition-colors">
+                  hello@terranode.earth
+                </a>
+              </div>
+              <p>Nairobi, Kenya</p>
+            </div>
+          </div>
+          <div className="rounded-lg border border-border p-6 space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="contact-name" className="text-sm font-medium">Name</label>
+              <input
+                id="contact-name"
+                type="text"
+                placeholder="Your name"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="contact-email" className="text-sm font-medium">Email</label>
+              <input
+                id="contact-email"
+                type="email"
+                placeholder="you@company.com"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="contact-message" className="text-sm font-medium">Message</label>
+              <textarea
+                id="contact-message"
+                rows={3}
+                placeholder="Tell us what you're working on..."
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+              />
+            </div>
+            <Button className="w-full">Send message</Button>
+          </div>
         </div>
       </section>
     </div>

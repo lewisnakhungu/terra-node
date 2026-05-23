@@ -14,10 +14,10 @@ import { ArrowRight } from "lucide-react";
 
 export default function CalculatorPage() {
   return (
-    <PageWrapper className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <PageWrapper className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
       <div className="mb-10">
-        <h1 className="text-3xl font-bold font-[family-name:var(--font-space)]">
-          AI Compute Debt Calculator
+        <h1 className="text-3xl font-bold">
+          Compute debt calculator
         </h1>
         <p className="mt-2 text-muted-foreground">
           Quantify the arable land and water footprint of your GPU cluster.
@@ -25,15 +25,15 @@ export default function CalculatorPage() {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        <Card className="glass">
+        <Card>
           <CardHeader>
-            <CardTitle>Compute Profile</CardTitle>
+            <CardTitle>Compute profile</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <GpuSelector />
             <UptimeSlider />
             <div className="space-y-2">
-              <Label>Cooling Type</Label>
+              <Label>Cooling type</Label>
               <CoolingToggle />
             </div>
           </CardContent>
@@ -41,9 +41,9 @@ export default function CalculatorPage() {
 
         <div className="space-y-6">
           <DebtDisplay />
-          <Card className="glass">
+          <Card>
             <CardHeader>
-              <CardTitle>Debt Breakdown</CardTitle>
+              <CardTitle>Debt breakdown</CardTitle>
             </CardHeader>
             <CardContent>
               <DebtChart />
@@ -51,8 +51,8 @@ export default function CalculatorPage() {
           </Card>
           <Button size="lg" className="w-full" asChild>
             <Link href="/corporate">
-              Offset Now
-              <ArrowRight className="h-5 w-5" />
+              Offset now
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>

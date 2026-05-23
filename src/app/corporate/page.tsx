@@ -46,10 +46,10 @@ export default function CorporatePage() {
   };
 
   return (
-    <PageWrapper className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <PageWrapper className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
       <div className="mb-10">
-        <h1 className="text-3xl font-bold font-[family-name:var(--font-space)]">
-          Corporate Credit Purchase
+        <h1 className="text-3xl font-bold">
+          Corporate credit purchase
         </h1>
         <p className="mt-2 text-muted-foreground">
           Purchase verified Land Restoration Credits to offset your compute debt.
@@ -58,30 +58,30 @@ export default function CorporatePage() {
 
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-8">
-          <Card className="glass">
+          <Card>
             <CardHeader>
-              <CardTitle>Select Credit Tier</CardTitle>
+              <CardTitle>Select credit tier</CardTitle>
             </CardHeader>
             <CardContent>
               <CreditSelector selectedCredits={credits} onSelect={setCredits} />
             </CardContent>
           </Card>
 
-          <Card className="glass">
+          <Card>
             <CardHeader>
-              <CardTitle>Select Restoration Project</CardTitle>
+              <CardTitle>Select restoration project</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-2">
               {projects.map((p) => (
                 <button
                   key={p.id}
                   type="button"
                   onClick={() => setProjectId(p.id)}
                   className={cn(
-                    "w-full rounded-lg border p-3 text-left text-sm transition-all",
+                    "w-full rounded-lg border p-3 text-left text-sm transition-colors",
                     projectId === p.id
                       ? "border-primary bg-primary/10"
-                      : "border-border hover:border-primary/50"
+                      : "border-border hover:border-foreground/30"
                   )}
                 >
                   <span className="font-medium">{p.name}</span>
@@ -92,7 +92,7 @@ export default function CorporatePage() {
           </Card>
 
           <div className="space-y-2">
-            <Label>Company Name</Label>
+            <Label>Company name</Label>
             <Input value={buyerName} onChange={(e) => setBuyerName(e.target.value)} />
           </div>
 

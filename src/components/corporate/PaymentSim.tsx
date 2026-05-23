@@ -23,7 +23,7 @@ export function PaymentSim({ onComplete, disabled }: PaymentSimProps) {
   };
 
   return (
-    <div className="space-y-4 rounded-xl border border-border p-6 glass">
+    <div className="space-y-4 rounded-lg border border-border p-6">
       <div className="flex items-center gap-2 text-muted-foreground">
         <CreditCard className="h-5 w-5" />
         <span className="text-sm">Simulated corporate payment</span>

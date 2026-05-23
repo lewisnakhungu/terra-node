@@ -16,7 +16,7 @@ export function CheckoutSummary({ project, credits, buyerName }: CheckoutSummary
   const total = sqM * CONVERSION.CREDIT_COST_PER_SQM;
 
   return (
-    <Card className="glass">
+    <Card>
       <CardHeader>
         <CardTitle>Order Summary</CardTitle>
       </CardHeader>

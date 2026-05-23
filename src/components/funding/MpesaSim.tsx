@@ -34,7 +34,7 @@ export function MpesaSim({ onComplete, disabled, amount }: MpesaSimProps) {
   };
 
   return (
-    <div className="space-y-4 rounded-xl border border-border p-6 glass">
+    <div className="space-y-4 rounded-lg border border-border p-6">
       <div className="flex items-center gap-2">
         <div className="rounded bg-[#4caf50] px-2 py-0.5 text-xs font-bold text-white">M-PESA</div>
         <span className="text-sm text-muted-foreground">Simulated STK Push</span>
